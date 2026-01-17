@@ -2,6 +2,7 @@
 Email notification sender using SendGrid.
 """
 import logging
+from typing import List, Dict, Any
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail, Email, To, Content
 from config import Config
@@ -21,7 +22,7 @@ class EmailSender:
         self.from_email = Email("noreply@propertysearch.com")
         self.to_email = To(Config.NOTIFICATION_EMAIL)
     
-    def send_property_results(self, properties: list[dict]) -> bool:
+    def send_property_results(self, properties: List[Dict[str, Any]]) -> bool:
         """
         Send email with property search results.
         
@@ -122,7 +123,7 @@ class EmailSender:
         </html>
         """
     
-    def _format_properties_email(self, properties: list[dict]) -> str:
+    def _format_properties_email(self, properties: List[Dict[str, Any]]) -> str:
         """
         Format email with property listings.
         

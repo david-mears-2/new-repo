@@ -2,6 +2,7 @@
 Base scraper class for property search.
 """
 from abc import ABC, abstractmethod
+from typing import Optional
 import pandas as pd
 
 
@@ -19,7 +20,7 @@ class BaseScraper(ABC):
         pass
     
     @abstractmethod
-    def fetch_description(self, url: str) -> str:
+    def fetch_description(self, url: str) -> Optional[str]:
         """
         Fetch the full description for a property listing.
         
@@ -27,6 +28,6 @@ class BaseScraper(ABC):
             url: URL of the property listing
             
         Returns:
-            str: Full property description
+            Optional[str]: Full property description, or None if fetch fails
         """
         pass

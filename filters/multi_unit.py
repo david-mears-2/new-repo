@@ -3,6 +3,7 @@ Multi-unit property detection using keyword matching.
 """
 import re
 import logging
+from typing import Tuple, List, Dict, Any
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -45,7 +46,7 @@ class MultiUnitFilter:
         ]
         self.exclude_patterns = [re.compile(pattern, re.IGNORECASE) for pattern in self.EXCLUDE_KEYWORDS]
     
-    def is_multi_unit(self, description: str) -> tuple[bool, list[str]]:
+    def is_multi_unit(self, description: str) -> Tuple[bool, List[str]]:
         """
         Check if a property description indicates multiple units.
         
@@ -53,7 +54,7 @@ class MultiUnitFilter:
             description: Property description text
             
         Returns:
-            tuple: (is_multi_unit: bool, matched_patterns: list[str])
+            Tuple[bool, List[str]]: (is_multi_unit, matched_patterns)
         """
         if not description:
             return False, []
@@ -88,7 +89,7 @@ class MultiUnitFilter:
         
         return is_multi_unit, matched_patterns
     
-    def filter_properties(self, properties: list[dict]) -> list[dict]:
+    def filter_properties(self, properties: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
         Filter a list of properties to only include multi-unit properties.
         
@@ -96,7 +97,7 @@ class MultiUnitFilter:
             properties: List of property dictionaries with 'description' key
             
         Returns:
-            list: Filtered list of multi-unit properties
+            List[Dict[str, Any]]: Filtered list of multi-unit properties
         """
         multi_unit_properties = []
         
